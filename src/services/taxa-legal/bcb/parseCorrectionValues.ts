@@ -18,10 +18,22 @@ export function parseCorrectionValues(htmlContent: string) {
     );
   }
 
+  console.log("Matches: ", matches);
+
+  // Returns the results
+  const nominalValue = convertToNumber(matches[2]).toFixed(2);
+  const indexCorrection = convertToNumber(matches[3]).toFixed(8);
+  const percentageValue = convertToNumber(matches[4]).toFixed(6);
+  const correctedValue = convertToNumber(matches[5]).toFixed(2);
+  const appliedRate = (Number(correctedValue) - Number(nominalValue)).toFixed(
+    2
+  );
+
   return {
-    indexCorrection: convertToNumber(matches[3]).toFixed(8),
-    percentageValue: convertToNumber(matches[4]).toFixed(6),
-    correctedValue: convertToNumber(matches[5]).toFixed(2),
+    indexCorrection,
+    percentageValue,
+    correctedValue,
+    appliedRate,
   };
 }
 

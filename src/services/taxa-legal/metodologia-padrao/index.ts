@@ -8,6 +8,7 @@ interface CorrectionResult {
   indexCorrection: string;
   percentageValue: string;
   correctedValue: string;
+  appliedRate: string;
 }
 
 /**
@@ -51,16 +52,16 @@ export default function applyTaxaLegal(
     }
   }
 
-  // Calcula o valor corrigido
-  const correctedValue = nominalValue * (1 + totalTaxPercentage / 100);
-
   // Retorna os resultados
+  const correctedValue = nominalValue * (1 + totalTaxPercentage / 100);
   const indexCorrection = (totalTaxPercentage / 100).toFixed(8);
   const percentageValue = totalTaxPercentage.toFixed(6);
+  const appliedRate = (nominalValue * (totalTaxPercentage / 100)).toFixed(2);
 
   return {
     indexCorrection,
     percentageValue,
     correctedValue: correctedValue.toFixed(2),
+    appliedRate,
   };
 }
